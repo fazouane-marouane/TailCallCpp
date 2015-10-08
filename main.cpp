@@ -8,7 +8,7 @@ template<typename TResult, typename... TArgs>
 class TailRec
 {
 public:
-	using inner_t = std::function<boost::variant<TResult, boost::variant<TailRec<TResult>>>(TArgs...)>;
+	using inner_t = std::function<boost::variant<TResult, boost::recursive_wrapper<TailRec<TResult>>>(TArgs...)>;
 
 	TailRec(inner_t _f) : f(_f) {}
 	boost::variant<TResult, TailRec<TResult>> operator()(TArgs... args) const
