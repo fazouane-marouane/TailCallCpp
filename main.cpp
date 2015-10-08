@@ -31,7 +31,7 @@ public:
 	{
 		auto rec = [=](auto r) -> std::function<boost::variant<TResult, TailRec<TResult>>(TArgs...)> {
 			return [=](TArgs... args) -> boost::variant<TResult, TailRec<TResult>> {
-				return TailRec<TResult>(std::function<boost::variant<TResult, TailRec<TResult>>()>([=] { return (f(TailRec<TResult, TArgs...>(r(r))))(1,1); }));
+				return TailRec<TResult>(std::function<boost::variant<TResult, TailRec<TResult>>()>([=] { return (f(TailRec<TResult, TArgs...>(r(r))))(args...); }));
 			};
 		};
 		auto f2 = rec(rec);
