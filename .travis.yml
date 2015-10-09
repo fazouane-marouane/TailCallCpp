@@ -15,6 +15,9 @@ before_script:
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export MY_CC_Compiler=$(which gcc-${MY_GCC_VERSION}); fi
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export MY_CXX_Compiler=$(which clang++-${MY_CLANG_VERSION}); fi
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export MY_CC_Compiler=${CXX}; fi
+  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export MY_CC_Compiler=${CC}; fi
+  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then brew update clang; fi
   - mkdir build
   - cd build
   - echo ${TRAVIS_OS_NAME}
@@ -32,7 +35,7 @@ os:
 env:
   global:
     - MY_GCC_VERSION="5"
-    - MY_CLANG_VERSION="3.6"
+    - MY_CLANG_VERSION="3.7"
   matrix:
     - BUILD_TYPE=Debug
 addons:
@@ -43,6 +46,6 @@ addons:
     - boost-latest
     packages:
     - cmake
-    - clang-3.6
+    - clang-3.7
     - g++-5
     - libboost1.55-all-dev
