@@ -11,6 +11,10 @@ git:
     submodules: false
 
 before_script:
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export CXX=$(which g++-${GCC_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export CC=$(which gcc-${GCC_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CXX=$(which clang++-${CLANG_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CC=$(which clang-${CLANG_VERSION}); fi
   - mkdir build
   - cd build
   - cmake --version
