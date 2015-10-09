@@ -1,22 +1,18 @@
 #!/bin/bash
 set -ev
-if [ "$CXX_Cmp" == "g++" ]; then
-  export MY_CXX_Compiler=$(which g++-${GCC_Cmp});
+if [ "$CXX" == "g++" ]; then
+  export MY_CXX_Compiler=$(which g++-${MY_GCC_VERSION});
 fi
-if [ "$CXX_Cmp" == "clang++" ]; then
-  export MY_CXX_Compiler=$(which clang++-${CLANG_Cmp});
+if [ "$CXX" == "clang++" ]; then
+  export MY_CXX_Compiler=$(which clang++-${MY_CLANG_VERSION});
 fi
-if [ "$CC_Cmp" == "gcc" ]; then
-  export MY_CC_Compiler=$(which gcc-${GCC_Cmp});
+if [ "$CC" == "gcc" ]; then
+  export MY_CC_Compiler=$(which gcc-${MY_GCC_VERSION});
 fi
-if [ "$CC_Cmp" == "clang" ]; then
-  export MY_CC_Compiler=$(which clang-${CLANG_Cmp});
+if [ "$CC" == "clang" ]; then
+  export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION});
 fi
 echo ${TRAVIS_OS_NAME}
-echo ${CXX_Cmp}
-echo ${CC_Cmp}
-echo ${GCC_Cmp}
-echo ${CLANG_Cmp}
 echo ${CXX}
 echo ${CC}
 echo ${MY_GCC_VERSION}
