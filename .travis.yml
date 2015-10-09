@@ -17,6 +17,10 @@ before_script:
   - CLANG_Cmp=${MY_CLANG_VERSION}
   - MY_CXX_Compiler=""
   - MY_CC_Compiler=""
+  - chmod a+x ./ci/travis.linux.before_install.sh
+  - chmod a+x ./ci/travis.osx.before_install.sh
+  - if [ -z "${TRAVIS_OS_NAME}" ] || [ "${TRAVIS_OS_NAME}" = "linux" ]; then ./ci/travis.linux.before_install.sh; fi
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ./ci/travis.osx.before_install.sh; fi
   - chmod a+x ./ci/travis.before_install.sh
   - ./ci/travis.before_install.sh
   - mkdir build

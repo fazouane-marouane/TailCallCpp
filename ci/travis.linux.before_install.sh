@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ev
+echo Before install on linux.
 if [ "$CXX" == "g++" ]; then
   MY_CXX_Compiler=g++-${MY_GCC_VERSION};
 fi

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ev
+echo Before install on OSX.
 brew update
 brew upgrade clang
 brew upgrade gcc
