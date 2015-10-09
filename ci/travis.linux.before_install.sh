@@ -1,16 +1,16 @@
 #!/bin/bash
 set -ev
-if [ "${CXX}" == "g++" ]; then
-  export MY_CXX_Compiler=$(which g++-${MY_GCC_VERSION});
+if [ "${CXX_Cmp}" == "g++" ]; then
+  export MY_CXX_Compiler=$(which g++-${GCC_Cmp});
 fi
-if [ "${CXX}" == "clang++" ]; then
-  export MY_CXX_Compiler=$(which clang++-${MY_CLANG_VERSION});
+if [ "${CXX_Cmp}" == "clang++" ]; then
+  export MY_CXX_Compiler=$(which clang++-${CLANG_Cmp});
 fi
-if [ "${CC}" == "gcc" ]; then
-  export MY_CC_Compiler=$(which gcc-${MY_GCC_VERSION});
+if [ "${CC_Cmp}" == "gcc" ]; then
+  export MY_CC_Compiler=$(which gcc-${GCC_Cmp});
 fi
-if [ "${CC}" == "clang" ]; then
-  export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION});
+if [ "${CC_Cmp}" == "clang" ]; then
+  export MY_CC_Compiler=$(which clang-${CLANG_Cmp});
 fi
 mkdir build
 cd build
