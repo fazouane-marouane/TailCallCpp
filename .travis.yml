@@ -19,6 +19,8 @@ before_script:
   - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export CC_Compiler=${CC}; fi
   - mkdir build
   - cd build
+  - ${CXX_Compiler} --version
+  - ${CC_Compiler} --version
   - cmake --version
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${CXX_Compiler} -DCMAKE_C_COMPILER=${CC_Compiler} ..
 
