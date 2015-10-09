@@ -17,3 +17,5 @@ echo ${CXX}
 echo ${CC}
 echo ${MY_GCC_VERSION}
 echo ${MY_CLANG_VERSION}
+echo ${MY_CXX_Compiler}
+echo ${MY_CC_Compiler}

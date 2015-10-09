@@ -22,6 +22,8 @@ before_script:
   - mkdir build
   - cd build
   - cmake --version
+  - echo ${MY_CXX_Compiler}
+  - echo ${MY_CC_Compiler}
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${MY_CXX_Compiler} -DCMAKE_C_COMPILER=${MY_CC_Compiler} ..
 
 script: cd build && make
