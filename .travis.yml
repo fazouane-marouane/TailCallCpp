@@ -17,6 +17,7 @@ before_script:
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION}); fi
   - mkdir build
   - cd build
+  - echo $(TRAVIS_OS_NAME)
   - ${MY_CXX_Compiler} --version
   - ${MY_CC_Compiler} --version
   - cmake --version
