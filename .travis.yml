@@ -22,7 +22,7 @@ before_script:
   - echo ${MY_CC_Compiler}
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${MY_CXX_Compiler} -DCMAKE_C_COMPILER=${MY_CC_Compiler} ..
 
-script: cd build && make
+script: make
 
 os:
   - linux
@@ -43,4 +43,4 @@ addons:
     - cmake
     - clang-3.7
     - g++-5
-    - libboost-all-dev
+    - libboost1.55-all-dev
