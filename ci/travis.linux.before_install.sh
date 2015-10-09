@@ -12,4 +12,4 @@ fi
 if [ "${CC}" == "clang" ]; then
   export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION});
 fi
-chmod a+x ./ci/travis.install.sh
+./ci/travis.install.sh

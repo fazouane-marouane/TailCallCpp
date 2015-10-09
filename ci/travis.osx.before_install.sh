@@ -5,4 +5,4 @@ brew upgrade clang
 brew upgrade gcc
 export MY_CC_Compiler=${CXX}
 export MY_CC_Compiler=${CC}
-chmod a+x ./ci/travis.install.sh
+./ci/travis.install.sh

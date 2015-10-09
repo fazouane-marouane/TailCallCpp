@@ -14,7 +14,7 @@ before_script:
   - chmod a+x ./ci/travis.before_install.sh
   - ./ci/travis.before_install.sh
 
-script: make
+script: cd build && make
 
 os:
   - linux
