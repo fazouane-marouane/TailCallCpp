@@ -26,6 +26,7 @@ script: make
 
 os:
   - linux
+  - osx
 
 env:
   global:
