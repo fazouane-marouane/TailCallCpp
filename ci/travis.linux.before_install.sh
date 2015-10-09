@@ -17,6 +17,10 @@ echo ${CXX_Cmp}
 echo ${CC_Cmp}
 echo ${GCC_Cmp}
 echo ${CLANG_Cmp}
+echo ${CXX}
+echo ${CC}
+echo ${MY_GCC_VERSION}
+echo ${MY_CLANG_VERSION}
 mkdir build
 cd build
 ${MY_CXX_Compiler} --version
