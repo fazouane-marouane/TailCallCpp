@@ -8,7 +8,9 @@ compiler:
 git:
     submodules: false
 
-before_install: ./ci/travis.before_install.sh
+before_install:
+  - chmod a+x ./ci/travis.before_install.sh
+  - ./ci/travis.before_install.sh
 
 before_script:
   - echo ${TRAVIS_OS_NAME}
