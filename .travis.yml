@@ -11,18 +11,16 @@ git:
     submodules: false
 
 before_script:
-  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export CXX_Compiler=$(which g++-${GCC_VERSION}); fi
-  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export CC_Compiler=$(which gcc-${GCC_VERSION}); fi
-  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CXX_Compiler=$(which clang++-${CLANG_VERSION}); fi
-  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CC_Compiler=$(which clang-${CLANG_VERSION}); fi
-  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export CXX_Compiler=${CXX}; fi
-  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export CC_Compiler=${CC}; fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export MY_CXX_Compiler=$(which g++-${MY_GCC_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export MY_CC_Compiler=$(which gcc-${MY_GCC_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export MY_CXX_Compiler=$(which clang++-${MY_CLANG_VERSION}); fi
+  - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION}); fi
   - mkdir build
   - cd build
-  - ${CXX_Compiler} --version
-  - ${CC_Compiler} --version
+  - ${MY_CXX_Compiler} --version
+  - ${MY_CC_Compiler} --version
   - cmake --version
-  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${CXX_Compiler} -DCMAKE_C_COMPILER=${CC_Compiler} ..
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${MY_CXX_Compiler} -DCMAKE_C_COMPILER=${MY_CC_Compiler} ..
 
 script: make
 
@@ -31,8 +29,8 @@ os:
 
 env:
   global:
-    - GCC_VERSION="5"
-    - CLANG_VERSION="3.6"
+    - MY_GCC_VERSION="5"
+    - MY_CLANG_VERSION="3.6"
   matrix:
     - BUILD_TYPE=Debug
 addons:
