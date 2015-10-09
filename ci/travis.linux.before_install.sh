@@ -1,16 +1,16 @@
 #!/bin/bash
 set -ev
 if [ "$CXX" == "g++" ]; then
-  export MY_CXX_Compiler=$(which g++-${MY_GCC_VERSION});
+  export MY_CXX_Compiler=g++-${MY_GCC_VERSION};
 fi
 if [ "$CXX" == "clang++" ]; then
-  export MY_CXX_Compiler=$(which clang++-${MY_CLANG_VERSION});
+  export MY_CXX_Compiler=clang++-${MY_CLANG_VERSION};
 fi
 if [ "$CC" == "gcc" ]; then
-  export MY_CC_Compiler=$(which gcc-${MY_GCC_VERSION});
+  export MY_CC_Compiler=gcc-${MY_GCC_VERSION};
 fi
 if [ "$CC" == "clang" ]; then
-  export MY_CC_Compiler=$(which clang-${MY_CLANG_VERSION});
+  export MY_CC_Compiler=clang-${MY_CLANG_VERSION};
 fi
 echo ${TRAVIS_OS_NAME}
 echo ${CXX}
