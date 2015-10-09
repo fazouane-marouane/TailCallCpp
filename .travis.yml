@@ -4,6 +4,8 @@ compiler:
   - gcc
   - clang
 
+sudo: false
+
 # Handle git submodules yourself
 git:
     submodules: false
