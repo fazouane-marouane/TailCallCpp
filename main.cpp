@@ -29,14 +29,14 @@ class TailRecursiveYCombinator
 public:
 	std::function<TResult(TArgs...)> operator()(TailRec_t<TResult, TArgs...> f)
 	{
-		auto rec = [=](auto r) -> std::function<boost::variant<TResult, TailRec<TResult>>(TArgs...)> {
-			return [=](TArgs... args) -> boost::variant<TResult, TailRec<TResult>> {
-				return TailRec<TResult>(std::function<boost::variant<TResult, TailRec<TResult>>()>([=] { return (f(TailRec<TResult, TArgs...>(r(r))))(args...); }));
+		return [f](TArgs... args) -> TResult {
+			auto rec = [&f](auto& r) -> std::function<boost::variant<TResult, TailRec<TResult>>(TArgs...)> {
+				return [&f, &r](auto... _args) -> boost::variant<TResult, TailRec<TResult>> {
+					return TailRec<TResult>(std::function<boost::variant<TResult, TailRec<TResult>>()>([&f, &r, _args...] { return (f(TailRec<TResult, TArgs...>(r(r))))(_args...); }));
+				};
 			};
-		};
-		auto f2 = rec(rec);
-		return [=](TArgs... args) -> TResult {
-			auto r = f2(args...);
+			auto _f = rec(rec);
+			auto r = _f(args...);
 			while (r.which() == 1)
 			{
 				r = (boost::get<TailRec<TResult>>(r))();
