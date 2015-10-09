@@ -11,18 +11,10 @@ git:
     submodules: false
 
 before_script:
-  - CC_Cmp=${CC}
-  - CXX_Cmp=${CXX}
-  - GCC_Cmp=${MY_GCC_VERSION}
-  - CLANG_Cmp=${MY_CLANG_VERSION}
-  - MY_CXX_Compiler=""
-  - MY_CC_Compiler=""
-  - chmod a+x ./ci/travis.linux.before_install.sh
-  - chmod a+x ./ci/travis.osx.before_install.sh
-  - if [ -z "${TRAVIS_OS_NAME}" ] || [ "${TRAVIS_OS_NAME}" = "linux" ]; then ./ci/travis.linux.before_install.sh; fi
-  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ./ci/travis.osx.before_install.sh; fi
-  - chmod a+x ./ci/travis.before_install.sh
-  - ./ci/travis.before_install.sh
+  - if [ "$CXX" == "g++" ]; then  MY_CXX_Compiler=g++-${MY_GCC_VERSION}; fi
+  - if [ "$CXX" == "clang++" ]; then MY_CXX_Compiler=clang++-${MY_CLANG_VERSION}; fi
+  - if [ "$CC" == "gcc" ]; then  MY_CC_Compiler=gcc-${MY_GCC_VERSION}; fi
+  - if [ "$CC" == "clang" ]; then MY_CC_Compiler=clang-${MY_CLANG_VERSION}; fi
   - mkdir build
   - cd build
   - cmake --version
@@ -34,7 +26,6 @@ script: cd build && make
 
 os:
   - linux
-  - osx
 
 env:
   global:
@@ -46,10 +37,10 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
+    - llvm-toolchain-precise-3.7
     - boost-latest
     packages:
     - cmake
     - clang-3.7
     - g++-5
-    - libboost1.55-all-dev
+    - libboost-all-dev
