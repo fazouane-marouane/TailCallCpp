@@ -15,8 +15,8 @@ before_script:
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" == "g++" ]; then export CC_Compiler=$(which gcc-${GCC_VERSION}); fi
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CXX_Compiler=$(which clang++-${CLANG_VERSION}); fi
   - if [ "$TRAVIS_OS_NAME"=="linux" ] && [ "$CXX" != "g++" ]; then export CC_Compiler=$(which clang-${CLANG_VERSION}); fi
-  - [ "$TRAVIS_OS_NAME"=="osx" ]; then export CXX_Compiler=${CXX}; fi
-  - [ "$TRAVIS_OS_NAME"=="osx" ]; then export CC_Compiler=${CC}; fi
+  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export CXX_Compiler=${CXX}; fi
+  - if [ "$TRAVIS_OS_NAME"=="osx" ]; then export CC_Compiler=${CC}; fi
   - mkdir build
   - cd build
   - cmake --version
