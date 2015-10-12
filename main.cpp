@@ -9,7 +9,7 @@ int factorial(int n)
 
 int tailcall_factorial(int n, int r)
 {
-  return n<2 ? r : factorial(n - 1, n*r);
+  return n<2 ? r : tailcall_factorial(n - 1, n*r);
 }
 
 int main()
