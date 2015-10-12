@@ -3,6 +3,8 @@
 #define TailCallCpp_TailCall_H
 #include <boost/variant.hpp>
 #include <functional>
+#include <memory>
+#include <utility>
 
 namespace TailCallCpp
 {
@@ -75,6 +77,42 @@ namespace TailCallCpp
   private:
     std::function<TResult(TArgs...)> f;
   };
+
+  template<typename F>
+  class GenericRecWrapper
+  {
+  public:
+    GenericRecWrapper(F const& _f) : f(_f) {}
+    GenericRecWrapper(F&& _f) : f(std::move(_f)) {}
+
+      template<typename T>
+    RecWrapper<T> GetImpl() const
+    {
+    return RecWrapper<T>(f);
+      }
+
+    template<typename TReturn>
+    auto GetImplWithReturnType() const
+    {
+      return [this](auto... args) { return call<TReturn, decltype(args)...> (args...); };
+    }
+
+    template<typename TResult, typename... TArgs>
+    TResult call(TArgs... args) const
+    {
+      return (GetImpl<TResult(TArgs...)>())(args...);
+    }
+
+  private:
+    F f;
+  };
+
+
+  template<typename F>
+  GenericRecWrapper<F> make_GenericRecWrapper(F&& f)
+  {
+    return GenericRecWrapper<F>(std::forward<F>(f));
+  }
 }
 
 #endif // TailCallCpp_TailCall_H

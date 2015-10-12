@@ -21,9 +21,19 @@ int main()
     };
   });
 
+  auto MyGenericFactorial = TailCallCpp::make_GenericRecWrapper([](auto& fact) {
+    return [=](auto n, auto r) {
+      return n < 2 ? r : fact(n - 1, n*r);
+    };
+  });
+
+
   std::cout << MyFactorial(5, 1) << std::endl;
   std::cout << factorial(5) << std::endl;
   std::cout << tailcall_factorial(5, 1) << std::endl;
+  std::cout << MyGenericFactorial.call<int,int,int>(5, 1) << std::endl;
+  std::cout << MyGenericFactorial.call<double, double, double>(5.1, 1) << std::endl;
+  std::cout << (MyGenericFactorial.GetImplWithReturnType<double>())(5.1, 1.0) << std::endl;
 
 
   //const int N = 1000000;
