@@ -100,7 +100,7 @@ namespace TailCallCpp
     template<typename TReturn>
     auto GetImplWithReturnType() const
     {
-      return [this](auto... args) { return call<TReturn, decltype(args)...> (args...); };
+      return [this](auto... args) { return this->call<TReturn, decltype(args)...> (args...); };
     }
 
   private:
