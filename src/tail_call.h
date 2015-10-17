@@ -85,22 +85,22 @@ namespace TailCallCpp
     GenericRecWrapper(F const& _f) : f(_f) {}
     GenericRecWrapper(F&& _f) : f(std::move(_f)) {}
 
-      template<typename T>
+    template<typename T>
     RecWrapper<T> GetImpl() const
     {
-    return RecWrapper<T>(f);
-      }
-
-    template<typename TReturn>
-    auto GetImplWithReturnType() const
-    {
-      return [this](auto... args) { return call<TReturn, decltype(args)...> (args...); };
+      return RecWrapper<T>(f);
     }
 
     template<typename TResult, typename... TArgs>
     TResult call(TArgs... args) const
     {
       return (GetImpl<TResult(TArgs...)>())(args...);
+    }
+
+    template<typename TReturn>
+    auto GetImplWithReturnType() const
+    {
+      return [this](auto... args) { return call<TReturn, decltype(args)...> (args...); };
     }
 
   private:

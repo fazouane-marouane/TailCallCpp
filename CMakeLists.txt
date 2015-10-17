@@ -52,5 +52,9 @@ endif(CHECK_CXX_COMPILER_USED1)
 find_package (Boost REQUIRED)
 
 include_directories (${Boost_INCLUDE_DIRS})
+file(GLOB_RECURSE TailCallCpp_Files
+    "${TailCallCpp_SOURCE_DIR}/src/*.h"
+    "${TailCallCpp_SOURCE_DIR}/src/*.cpp"
+)
 
-add_executable (tailCall main.cpp)
+add_executable (tailCall ${TailCallCpp_Files} main.cpp)
